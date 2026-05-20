@@ -1,0 +1,17 @@
+backupbee2/                        ← your repo root
+│
+├── src/                           ← ONLY these go in src/
+│   ├── extension.ts
+│   ├── BackupManager.ts
+│   ├── SessionTracker.ts
+│   ├── BeeStatusBar.ts
+│   └── panels/
+│       └── BackupBeeDashboard.ts
+│
+├── package.json                   ← repo root
+├── tsconfig.json                  ← repo root
+├── webpack.config.js              ← repo root
+├── README.md                      ← repo root
+├── CHANGELOG.md                   ← repo root
+├── .gitignore                     ← repo root
+└── .vscodeignore                  ← repo root
