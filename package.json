@@ -1,0 +1,145 @@
+{
+  "name": "backupbee",
+  "displayName": "BackupBee 🐝",
+  "description": "Smart versioned backups, session file capture, and restore — your safety net in VS Code.",
+  "version": "2.0.0",
+  "publisher": "Imudaypamu",
+  "icon": "media/icon.png",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Imudaypamu/backupbee2"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["backup", "versioning", "auto-save", "file history", "restore"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "backupbee.toggleBackup",
+        "title": "BackupBee: Toggle Auto-Backup On/Off",
+        "icon": "$(bee)"
+      },
+      {
+        "command": "backupbee.toggleSessionCapture",
+        "title": "BackupBee: Toggle Session File Capture On/Off"
+      },
+      {
+        "command": "backupbee.selectBackupDir",
+        "title": "BackupBee: Set Backup Root Directory"
+      },
+      {
+        "command": "backupbee.openDashboard",
+        "title": "BackupBee: Open Dashboard",
+        "icon": "$(history)"
+      },
+      {
+        "command": "backupbee.finalizeAndClean",
+        "title": "BackupBee: Finalize & Clean All Backups"
+      },
+      {
+        "command": "backupbee.backupNow",
+        "title": "BackupBee: Backup Current File Now"
+      },
+      {
+        "command": "backupbee.restoreFile",
+        "title": "BackupBee: Restore File from Backup"
+      },
+      {
+        "command": "backupbee.viewSessionFiles",
+        "title": "BackupBee: View Session Captured Files"
+      }
+    ],
+    "configuration": {
+      "title": "BackupBee",
+      "properties": {
+        "backupbee.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic backups on file save."
+        },
+        "backupbee.sessionCaptureEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically save a copy of every file you open to the session capture folder."
+        },
+        "backupbee.backupRootDir": {
+          "type": "string",
+          "default": "",
+          "description": "Root directory for all backups. Defaults to workspace root if empty."
+        },
+        "backupbee.sessionCaptureDir": {
+          "type": "string",
+          "default": "",
+          "description": "Directory where session-captured files are saved. Defaults to <backupRoot>/_bee_session/"
+        },
+        "backupbee.maxBackupsPerFile": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of backup versions to keep per file."
+        },
+        "backupbee.excludePatterns": {
+          "type": "array",
+          "default": ["**/node_modules/**", "**/.git/**", "**/.bee_backups/**", "**/_bee_session/**"],
+          "description": "Glob patterns for files to exclude from backup."
+        },
+        "backupbee.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show BackupBee status in the status bar."
+        },
+        "backupbee.notifyOnBackup": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show a notification toast each time a backup is created."
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "backupbee.openDashboard",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "backupbee.backupNow",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b",
+        "when": "editorFocus"
+      },
+      {
+        "command": "backupbee.openDashboard",
+        "key": "ctrl+shift+alt+b",
+        "mac": "cmd+shift+alt+b"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.5.4",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
